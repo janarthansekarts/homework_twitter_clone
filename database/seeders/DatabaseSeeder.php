@@ -5,6 +5,11 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+// use App\Models\Comment;
+use App\Models\Tweet;
+use App\Models\User;
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,5 +23,53 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // User::factory(10)->create();
+
+        // User::factory()
+        // ->has(Tweet::factory()->count(3))
+        // ->create();
+
+        // Tweet::factory()->has(Comment::factory()->count(3)->create());
+
+
+        // \App\Models\Tweet::factory(10)->create();
+
+        // \App\Models\Comment::factory(10)->create();
+
+        // $user = User::factory()->create();
+
+        // $tweet = Tweet::factory()
+        //     ->count(3)
+        //     ->for($user)
+        //     // ->has(Comment::factory()->count(2))
+        //     ->create();
+
+        // $comment = Comment::factory()
+        //     ->count(3)
+        //     ->for($user)
+        //     ->for($tweet)
+        //     // ->has(Comment::factory()->count(2))
+        //     ->create();
+
+
+        
+        User::factory(10)->create()
+            ->each(function($user){
+            Tweet::create([
+                'user_id' => $user->id,
+                'tweet' => fake()->paragraph(),
+                'likes' => fake()->randomNumber(2)
+            ])->each(function($tweet)use($user){
+                $tweet->comments()->create([
+                    'comment' => fake()->sentence(),
+                    'user_id' => $user->id,
+                    'tweet_id' => $tweet->id
+                ]);
+            });
+        });  
+
+
+        
     }
 }
