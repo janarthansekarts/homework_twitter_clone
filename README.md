@@ -7,60 +7,83 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+Homework Twitter Sample 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Prerequisites:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Make sure you have Composer installed on your local machine.
+Ensure you have PHP and a web server (e.g., Apache or Nginx) set up.
+You may need a database server like MySQL or SQLite, depending on the project's requirements.
+Open a Terminal or Command Prompt:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Navigate to the directory where you want to store your local copy of the Laravel project.
+Clone the Repository:
 
-## Learning Laravel
+* Use the git clone command to clone the project's Git repository. Replace <repository_url> with the actual URL of the Git repository:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+git clone <repository_url>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* Change Directory:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Move into the project directory:
 
-## Laravel Sponsors
+cd <project_directory>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* Install Composer Dependencies:
 
-### Premium Partners
+Run the following command to install the project's dependencies using Composer:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+composer install
 
-## Contributing
+* Copy the Environment File:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Laravel uses a .env file for environment-specific configuration. You should copy the .env.example file to create your own .env file:
 
-## Code of Conduct
+cp .env.example .env
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+* Generate an Application Key:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run the following command to generate a unique application key for your Laravel project. This key is used for encrypting session and other data:
 
-## License
+php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+* Configure the .env File:
+
+Open the .env file and configure it with your database and other environment-specific settings.
+
+* Migrate the Database:
+
+Run the database migrations to create the necessary tables in your database:
+
+php artisan migrate
+
+or
+
+php artisan migrate --seed 
+
+
+--seed loads the Factory Seeders Data along with the Migration Tables.
+
+
+
+* Start the Development Server:
+
+You can use the built-in development server provided by Laravel to run your application. Run the following command:
+bash
+Copy code
+php artisan serve
+
+
+
+* File System Symbolic Link
+
+By default, the public disk in laravel `config/filesystems.php` uses the local driver and stores its files in `storage/app/public`.
+
+To make these files accessible from the web, you should create a symbolic link from `public/storage` to `storage/app/public`. Utilizing this folder convention will keep your publicly accessible files in one directory that can be easily shared across deployments when using zero down-time deployment systems like Envoyer.
+
+To create the symbolic link, you may use the storage:link Artisan command:
+
+php artisan storage:link
+

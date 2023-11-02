@@ -66,10 +66,10 @@
             </a>
             
 
-            <div class="search">
+            {{-- <div class="search">
                 <input type="text" placeholder="Search Twitter" />
                 <span class="fa fa-search"></span>
-            </div>
+            </div> --}}
 
         @endauth
 
