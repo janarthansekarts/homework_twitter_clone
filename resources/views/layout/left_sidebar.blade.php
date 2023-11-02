@@ -4,30 +4,33 @@
 
         <div class="user-info-wrap">
             <img src="assets/avatars/1.png" alt="" class="profile-picture" />
-
+@php
+    $user = auth()->user();
+    // dd($user->tweets,$user->has('tweets'), count($user->tweets));
+@endphp
             <div class="username-wrap">
-                <a href="#" class="display-name">LillyRue</a>
-                <a href="#" class="username">@lilly_rue</a>
+                <a href="#" class="display-name">{{ $user->name }}</a>
+                <a href="#" class="username">@.{{ str_replace(" ","_",$user->name) }} </a>
             </div>
 
             <ul class="user-stats">
                 <li>
                     <a href="#" class="user-stats-header">Tweets</a>
-                    <a href="#" class="user-stats-value">17</a>
+                    <a href="#" class="user-stats-value">{{ count($user->tweets) }}</a>
                 </li>
                 <li>
                     <a href="#" class="user-stats-header">Following</a>
-                    <a href="#" class="user-stats-value">86</a>
+                    <a href="#" class="user-stats-value">{{ count($user->followings) }}</a>
                 </li>
                 <li>
                     <a href="#" class="user-stats-header">Followers</a>
-                    <a href="#" class="user-stats-value">2</a>
+                    <a href="#" class="user-stats-value">{{ count($user->followers) }}</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="trending top-level-panel">
+    {{-- <div class="trending top-level-panel">
         <h1>Trends</h1>
 
         <ul class="trend-list">
@@ -48,5 +51,5 @@
                 <p class="subtext">Just started trending</p>
             </li>
         </ul>
-    </div>
+    </div> --}}
 </div>

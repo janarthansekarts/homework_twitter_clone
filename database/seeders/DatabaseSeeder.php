@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 // use App\Models\Comment;
 use App\Models\Tweet;
 use App\Models\User;
+use Illuminate\Support\Facades\URL;
 
 
 class DatabaseSeeder extends Seeder
@@ -58,8 +59,11 @@ class DatabaseSeeder extends Seeder
             ->each(function($user){
             Tweet::create([
                 'user_id' => $user->id,
-                'tweet' => fake()->paragraph(),
-                'likes' => fake()->randomNumber(2)
+                'tweet' => fake()->sentence(15),
+                'likes' => fake()->randomNumber(2),
+                // 'media' => public_path()."/assets/media/tweet-post.jpg"
+                'media' => URL::to("/assets/media/tweet-post.jpg")
+                // 'media' => base_path()."/assets/media/tweet-post.jpg"
             ])->each(function($tweet)use($user){
                 $tweet->comments()->create([
                     'comment' => fake()->sentence(),
